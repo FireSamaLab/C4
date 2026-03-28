@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "id": "prj_1774724682044",
+    "project": {
+      "clientName": "Yannick Fortier",
+      "projectName": "Construction Neuve VDM",
+      "projectAddress": "34 LEOPOLD-MARSOLAIS CH",
+      "projectType": "Bâtiment rectangulaire simple"
+    },
+    "assumptions": {
+      "heading": "Hypothèses par défaut pour estimation – Québec / Outaouais",
+      "disclaimer": "Ces paramètres sont des hypothèses d'affaires pour l'estimation seulement et ne constituent pas un avis légal ou de conformité au Code.",
+      "exteriorWallLumberType": "2x6",
+      "interiorWallLumberType": "2x4",
+      "studSpacing": 16,
+      "joistSpacing": 16,
+      "wasteFactor": 10,
+      "buildingLength": 40,
+      "buildingWidth": 28,
+      "numberOfFloors": 1,
+      "exteriorWallHeight": 8,
+      "interiorPartitionsCount": 0,
+      "interiorLinearFeet": 0,
+      "sheathingIncluded": true
+    },
+    "items": [
+      {
+        "materialKey": "2x6x8",
+        "description": "Montants extérieurs (2x6)",
+        "quantity": 122,
+        "unitPrice": 6.03,
+        "subtotal": 735.66
+      },
+      {
+        "materialKey": "2x6x8",
+        "description": "Lisses extérieures hautes + basses (2x6)",
+        "quantity": 57,
+        "unitPrice": 6.03,
+        "subtotal": 343.71
+      },
+      {
+        "materialKey": "SHEATHING-OSB-4x8",
+        "description": "Revêtement extérieur de base (optionnel) - feuilles 4x8",
+        "quantity": 38,
+        "unitPrice": 18.5,
+        "subtotal": 703
+      }
+    ],
+    "total": 1782.37,
+    "createdAt": "2026-03-28T19:04:42.044Z"
+  },
+  {
+    "id": "prj_1774724693851",
+    "project": {
+      "clientName": "Yannick Fortier",
+      "projectName": "Construction Neuve VDM",
+      "projectAddress": "34 LEOPOLD-MARSOLAIS CH",
+      "projectType": "Bâtiment rectangulaire simple"
+    },
+    "assumptions": {
+      "heading": "Hypothèses par défaut pour estimation – Québec / Outaouais",
+      "disclaimer": "Ces paramètres sont des hypothèses d'affaires pour l'estimation seulement et ne constituent pas un avis légal ou de conformité au Code.",
+      "exteriorWallLumberType": "2x6",
+      "interiorWallLumberType": "2x4",
+      "studSpacing": 16,
+      "joistSpacing": 16,
+      "wasteFactor": 10,
+      "buildingLength": 40,
+      "buildingWidth": 40,
+      "numberOfFloors": 1,
+      "exteriorWallHeight": 8,
+      "interiorPartitionsCount": 0,
+      "interiorLinearFeet": 0,
+      "sheathingIncluded": true
+    },
+    "items": [
+      {
+        "materialKey": "2x6x8",
+        "description": "Montants extérieurs (2x6)",
+        "quantity": 141,
+        "unitPrice": 6.03,
+        "subtotal": 850.23
+      },
+      {
+        "materialKey": "2x6x8",
+        "description": "Lisses extérieures hautes + basses (2x6)",
+        "quantity": 66,
+        "unitPrice": 6.03,
+        "subtotal": 397.98
+      },
+      {
+        "materialKey": "SHEATHING-OSB-4x8",
+        "description": "Revêtement extérieur de base (optionnel) - feuilles 4x8",
+        "quantity": 44,
+        "unitPrice": 18.5,
+        "subtotal": 814
+      }
+    ],
+    "total": 2062.21,
+    "createdAt": "2026-03-28T19:04:53.850Z"
+  }
+]

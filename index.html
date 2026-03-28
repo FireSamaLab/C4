@@ -18,11 +18,11 @@
       <section class="card">
         <h2>Tableau de bord</h2>
         <div class="row gap">
-          <button id="btnImportRona">Importer les prix RONA (one-time)</button>
+          <button id="btnImportRona" class="secondary" disabled>Importer les prix RONA (indisponible)</button>
           <button id="btnRefreshProjects" class="secondary">Rafraîchir les projets</button>
           <a href="#estimateSection" class="button-link">Créer une nouvelle estimation</a>
         </div>
-        <p id="importStatus" class="muted">Import non lancé.</p>
+        <p id="importStatus" class="muted">L'import RONA n'est pas disponible. Utilisez la saisie manuelle des prix ci-dessous.</p>
       </section>
 
       <section class="card">
@@ -31,9 +31,9 @@
       </section>
 
       <section class="card">
-        <h2>Prix de bois normalisés</h2>
+        <h3>Prix de bois normalisés</h3>
         <p class="muted">
-          Importés depuis RONA (one-time), puis modifiables manuellement avant estimation.
+          Saisissez manuellement les prix actuels (recommandé). L'import RONA peut être indisponible.
         </p>
         <table>
           <thead>
