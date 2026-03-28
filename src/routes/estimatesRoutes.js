@@ -12,12 +12,12 @@ router.post('/:projectId/generate', (req, res) => {
   const project = getProjectById(req.params.projectId);
 
   if (!project) {
-    return res.status(404).json({ message: 'Project not found.' });
+    return res.status(404).json({ message: 'Projet introuvable.' });
   }
 
   if (!project.assumptions) {
     return res.status(400).json({
-      message: 'Assumptions are missing. Please fill assumptions before generating estimate.'
+      message: 'Les hypothèses sont manquantes. Veuillez les remplir avant de générer l\'estimation.'
     });
   }
 
@@ -34,11 +34,11 @@ router.get('/:projectId', (req, res) => {
   const project = getProjectById(req.params.projectId);
 
   if (!project) {
-    return res.status(404).json({ message: 'Project not found.' });
+    return res.status(404).json({ message: 'Projet introuvable.' });
   }
 
   if (!project.estimate) {
-    return res.status(404).json({ message: 'No estimate generated yet for this project.' });
+    return res.status(404).json({ message: 'Aucune estimation n\'a encore été générée pour ce projet.' });
   }
 
   return res.json(project.estimate);

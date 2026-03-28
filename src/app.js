@@ -28,7 +28,7 @@ app.use('/api/estimates', estimatesRoutes);
 
 // Friendly health endpoint.
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, app: 'C4 Construction Estimator MVP' });
+  res.json({ ok: true, app: 'Estimateur C4 Construction MVP' });
 });
 
 module.exports = app;

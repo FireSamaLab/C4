@@ -95,32 +95,32 @@ function calculateEstimate(assumptions, prices) {
 
   const items = [
     {
-      item: 'Exterior wall studs (2x4)',
+      item: 'Montants des murs extérieurs (2x4)',
       quantity: totalStuds,
       unitPrice: roundMoney(studUnitPrice)
     },
     {
-      item: `Top and bottom plates (2x4x${chosenPlatePieceLength})`,
+      item: `Lisses hautes et basses (2x4x${chosenPlatePieceLength})`,
       quantity: plateQty,
       unitPrice: roundMoney(plateUnitPrice)
     },
     {
-      item: 'Floor joists (2x10x12)',
+      item: 'Solives de plancher (2x10x12)',
       quantity: totalJoistPieces,
       unitPrice: roundMoney(prices.lumber_2x10x12)
     },
     {
-      item: 'Rim boards (2x10x12)',
+      item: 'Solives de rive (2x10x12)',
       quantity: rimBoardQty,
       unitPrice: roundMoney(prices.lumber_2x10x12)
     },
     {
-      item: 'Sheathing sheets (OSB 4x8)',
+      item: 'Feuilles de revêtement (OSB 4x8)',
       quantity: osbSheets,
       unitPrice: roundMoney(prices.osb_sheet)
     },
     {
-      item: 'Subfloor sheets (Plywood 4x8)',
+      item: 'Feuilles de sous-plancher (contreplaqué 4x8)',
       quantity: plywoodSheets,
       unitPrice: roundMoney(prices.plywood_sheet)
     }

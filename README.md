@@ -1,30 +1,30 @@
-# C4 Construction Estimator (MVP)
+# Estimateur C4 Construction (MVP)
 
-Simple full-stack MVP to estimate framing wood quantities and rough cost for a rectangular new house.
+MVP full-stack simple pour estimer les quantités de bois de charpente et le coût approximatif d'une maison neuve rectangulaire.
 
-## Tech stack
+## Pile technologique
 - Node.js
 - Express
 - HTML/CSS
-- Vanilla JavaScript
-- Local JSON storage
+- JavaScript Vanilla
+- Stockage JSON local
 
-## Install and run
-1. Install dependencies:
+## Installation et démarrage
+1. Installer les dépendances :
    npm install
-2. Start server:
+2. Démarrer le serveur :
    npm start
-3. Open:
+3. Ouvrir :
    http://localhost:3000
 
-## MVP flow
-1. Create project (optionally upload a plan file)
-2. Enter project assumptions
-3. Maintain lumber/material prices
-4. Generate estimate and review results
+## Flux MVP
+1. Créer un projet (avec téléversement facultatif du plan)
+2. Saisir les hypothèses du projet
+3. Mettre à jour les prix des matériaux/du bois
+4. Générer l'estimation et consulter les résultats
 
-## Notes
-- This is an approximate framing estimator, not a structural engineering tool.
-- Storage is local JSON in the `data` folder.
-- Uploaded plan files are stored in `uploads`.
-- Built to be easy to extend later (example: AI plan reading).
+## Remarques
+- Il s'agit d'un estimateur approximatif, pas d'un outil d'ingénierie structurelle.
+- Le stockage utilise des fichiers JSON locaux dans le dossier data.
+- Les plans téléversés sont stockés dans uploads.
+- La structure est conçue pour évoluer facilement plus tard (ex. lecture de plans par IA).

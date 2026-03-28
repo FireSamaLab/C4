@@ -1,60 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C4 Construction - New Project</title>
+    <title>C4 Construction - Nouveau projet</title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
     <header>
-      <h1>C4 Construction Estimator</h1>
+      <h1>Estimateur C4 Construction</h1>
       <nav>
-        <a href="/index.html">Dashboard</a>
-        <a href="/new-project.html" class="active">New Project</a>
-        <a href="/prices.html">Price List</a>
+        <a href="/index.html">Tableau de bord</a>
+        <a href="/new-project.html" class="active">Nouveau projet</a>
+        <a href="/prices.html">Liste de prix</a>
       </nav>
     </header>
 
     <main class="container">
       <section class="card">
-        <h2>Create New Estimate Project</h2>
-        <p class="muted">Start with project information and optional plan upload.</p>
+        <h2>Créer un nouveau projet d'estimation</h2>
+        <p class="muted">Commencez par les informations du projet et un téléversement de plan facultatif.</p>
 
         <form id="newProjectForm">
           <div class="grid-2">
             <div>
-              <label for="clientName">Client Name *</label>
+              <label for="clientName">Nom du client *</label>
               <input id="clientName" name="clientName" required />
             </div>
             <div>
-              <label for="projectName">Project Name *</label>
+              <label for="projectName">Nom du projet *</label>
               <input id="projectName" name="projectName" required />
             </div>
           </div>
 
           <div class="grid-2">
             <div>
-              <label for="projectAddress">Project Address *</label>
+              <label for="projectAddress">Adresse du projet *</label>
               <input id="projectAddress" name="projectAddress" required />
             </div>
             <div>
-              <label for="projectType">Project Type *</label>
+              <label for="projectType">Type de projet *</label>
               <select id="projectType" name="projectType" required>
-                <option value="">Select type</option>
-                <option value="rectangular-new-house">Rectangular new house</option>
+                <option value="">Sélectionner un type</option>
+                <option value="rectangular-new-house">Maison neuve rectangulaire</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label for="planUpload">Plan Upload (local file)</label>
+            <label for="planUpload">Téléversement du plan (fichier local)</label>
             <input id="planUpload" name="planUpload" type="file" accept=".pdf,.png,.jpg,.jpeg,.dwg" />
           </div>
 
           <div class="actions">
-            <button type="submit">Create Project</button>
-            <a class="button-secondary" href="/index.html">Back to Dashboard</a>
+            <button type="submit">Créer le projet</button>
+            <a class="button-secondary" href="/index.html">Retour au tableau de bord</a>
           </div>
         </form>
 

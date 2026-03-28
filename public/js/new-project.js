@@ -7,7 +7,7 @@ const statusEl = document.getElementById('status');
 formEl.addEventListener('submit', async (event) => {
   event.preventDefault();
   statusEl.className = 'muted';
-  statusEl.textContent = 'Creating project...';
+  statusEl.textContent = 'Création du projet...';
 
   try {
     const formData = new FormData(formEl);
@@ -20,11 +20,11 @@ formEl.addEventListener('submit', async (event) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || 'Unable to create project.');
+      throw new Error(data.message || 'Impossible de créer le projet.');
     }
 
     statusEl.className = 'success';
-    statusEl.textContent = 'Project created. Redirecting to assumptions...';
+    statusEl.textContent = 'Projet créé. Redirection vers les hypothèses...';
 
     window.location.href = `/assumptions.html?projectId=${data.id}`;
   } catch (error) {

@@ -12,7 +12,7 @@ async function apiFetch(url, options = {}) {
   }
 
   if (!response.ok) {
-    const message = data && data.message ? data.message : `Request failed: ${response.status}`;
+    const message = data && data.message ? data.message : `Échec de la requête : ${response.status}`;
     throw new Error(message);
   }
 

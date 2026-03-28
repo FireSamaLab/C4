@@ -22,7 +22,7 @@ router.put('/', (req, res) => {
 
     if (!Number.isFinite(value) || value < 0) {
       return res.status(400).json({
-        message: `Invalid price for ${key}. Please enter a positive number.`
+        message: `Prix invalide pour ${key}. Veuillez entrer un nombre positif.`
       });
     }
 

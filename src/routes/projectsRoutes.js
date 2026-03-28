@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
   const project = getProjectById(req.params.id);
 
   if (!project) {
-    return res.status(404).json({ message: 'Project not found.' });
+    return res.status(404).json({ message: 'Projet introuvable.' });
   }
 
   return res.json(project);
@@ -57,7 +57,7 @@ router.post('/', upload.single('planUpload'), (req, res) => {
 
   if (!clientName || !projectName || !projectAddress || !projectType) {
     return res.status(400).json({
-      message: 'Please fill all required fields: client name, project name, address, type.'
+      message: 'Veuillez remplir tous les champs requis : nom du client, nom du projet, adresse, type.'
     });
   }
 
@@ -81,7 +81,7 @@ router.put('/:id/assumptions', (req, res) => {
   const project = getProjectById(req.params.id);
 
   if (!project) {
-    return res.status(404).json({ message: 'Project not found.' });
+    return res.status(404).json({ message: 'Projet introuvable.' });
   }
 
   const assumptions = normalizeAssumptions(req.body);

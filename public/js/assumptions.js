@@ -9,7 +9,7 @@ const saveAndGenerateBtn = document.getElementById('saveAndGenerateBtn');
 
 if (!projectId) {
   projectInfoEl.className = 'error';
-  projectInfoEl.textContent = 'Missing projectId in URL.';
+  projectInfoEl.textContent = 'projectId manquant dans l\'URL.';
   formEl.style.display = 'none';
 }
 
@@ -21,7 +21,7 @@ async function loadProject() {
   try {
     const project = await apiFetch(`/api/projects/${projectId}`);
 
-    projectInfoEl.textContent = `Project: ${project.projectName} (${project.clientName})`;
+    projectInfoEl.textContent = `Projet : ${project.projectName} (${project.clientName})`;
 
     if (project.assumptions) {
       // Pre-fill existing assumptions for easy edits.
@@ -62,12 +62,12 @@ async function saveAssumptions() {
 formEl.addEventListener('submit', async (event) => {
   event.preventDefault();
   statusEl.className = 'muted';
-  statusEl.textContent = 'Saving assumptions...';
+  statusEl.textContent = 'Enregistrement des hypothèses...';
 
   try {
     await saveAssumptions();
     statusEl.className = 'success';
-    statusEl.textContent = 'Assumptions saved.';
+    statusEl.textContent = 'Hypothèses enregistrées.';
   } catch (error) {
     statusEl.className = 'error';
     statusEl.textContent = error.message;
@@ -76,7 +76,7 @@ formEl.addEventListener('submit', async (event) => {
 
 saveAndGenerateBtn.addEventListener('click', async () => {
   statusEl.className = 'muted';
-  statusEl.textContent = 'Saving assumptions and generating estimate...';
+  statusEl.textContent = 'Enregistrement des hypothèses et génération de l\'estimation...';
 
   try {
     await saveAssumptions();

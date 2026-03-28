@@ -11,7 +11,7 @@ const totalCostEl = document.getElementById('totalCost');
 
 if (!projectId) {
   projectInfoEl.className = 'error';
-  projectInfoEl.textContent = 'Missing projectId in URL.';
+  projectInfoEl.textContent = 'projectId manquant dans l\'URL.';
   generateBtn.disabled = true;
 }
 
@@ -20,7 +20,7 @@ assumptionsLink.href = `/assumptions.html?projectId=${projectId || ''}`;
 function renderEstimate(estimate) {
   if (!estimate || !estimate.items || !estimate.items.length) {
     resultsBody.innerHTML = '';
-    totalCostEl.textContent = 'Total Cost: $0.00';
+    totalCostEl.textContent = 'Coût total : $0.00';
     return;
   }
 
@@ -37,7 +37,7 @@ function renderEstimate(estimate) {
     })
     .join('');
 
-  totalCostEl.textContent = `Total Cost: ${formatMoney(estimate.totalCost)}`;
+  totalCostEl.textContent = `Coût total : ${formatMoney(estimate.totalCost)}`;
 }
 
 async function loadProjectAndEstimate() {
@@ -46,27 +46,27 @@ async function loadProjectAndEstimate() {
   }
 
   statusEl.className = 'muted';
-  statusEl.textContent = 'Loading project data...';
+  statusEl.textContent = 'Chargement des données du projet...';
 
   try {
     const project = await apiFetch(`/api/projects/${projectId}`);
 
-    projectInfoEl.textContent = `Project: ${project.projectName} (${project.clientName})`;
+    projectInfoEl.textContent = `Projet : ${project.projectName} (${project.clientName})`;
 
     if (!project.assumptions) {
       statusEl.className = 'error';
-      statusEl.textContent = 'This project has no assumptions yet. Please fill assumptions first.';
+      statusEl.textContent = 'Ce projet n\'a pas encore d\'hypothèses. Veuillez les remplir d\'abord.';
       renderEstimate(null);
       return;
     }
 
     if (project.estimate) {
       statusEl.className = 'success';
-      statusEl.textContent = `Estimate generated on ${new Date(project.estimate.generatedAt).toLocaleString()}.`;
+      statusEl.textContent = `Estimation générée le ${new Date(project.estimate.generatedAt).toLocaleString('fr-CA')}.`;
       renderEstimate(project.estimate);
     } else {
       statusEl.className = 'muted';
-      statusEl.textContent = 'No estimate yet. Click Generate / Recalculate Estimate.';
+      statusEl.textContent = 'Aucune estimation pour le moment. Cliquez sur Générer / recalculer l\'estimation.';
       renderEstimate(null);
     }
   } catch (error) {
@@ -81,7 +81,7 @@ generateBtn.addEventListener('click', async () => {
   }
 
   statusEl.className = 'muted';
-  statusEl.textContent = 'Generating estimate...';
+  statusEl.textContent = 'Génération de l\'estimation...';
 
   try {
     const updatedProject = await apiFetch(`/api/estimates/${projectId}/generate`, {
@@ -89,7 +89,7 @@ generateBtn.addEventListener('click', async () => {
     });
 
     statusEl.className = 'success';
-    statusEl.textContent = `Estimate generated on ${new Date(updatedProject.estimate.generatedAt).toLocaleString()}.`;
+    statusEl.textContent = `Estimation générée le ${new Date(updatedProject.estimate.generatedAt).toLocaleString('fr-CA')}.`;
     renderEstimate(updatedProject.estimate);
   } catch (error) {
     statusEl.className = 'error';

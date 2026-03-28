@@ -6,7 +6,7 @@ const statusEl = document.getElementById('status');
 
 async function loadPrices() {
   statusEl.className = 'muted';
-  statusEl.textContent = 'Loading price list...';
+  statusEl.textContent = 'Chargement de la liste de prix...';
 
   try {
     const prices = await apiFetch('/api/prices');
@@ -17,7 +17,7 @@ async function loadPrices() {
       }
     }
 
-    statusEl.textContent = 'Prices loaded.';
+    statusEl.textContent = 'Prix chargés.';
   } catch (error) {
     statusEl.className = 'error';
     statusEl.textContent = error.message;
@@ -39,7 +39,7 @@ formEl.addEventListener('submit', async (event) => {
   };
 
   statusEl.className = 'muted';
-  statusEl.textContent = 'Saving prices...';
+  statusEl.textContent = 'Enregistrement des prix...';
 
   try {
     await apiFetch('/api/prices', {
@@ -49,7 +49,7 @@ formEl.addEventListener('submit', async (event) => {
     });
 
     statusEl.className = 'success';
-    statusEl.textContent = 'Price list saved successfully.';
+    statusEl.textContent = 'Liste de prix enregistrée avec succès.';
   } catch (error) {
     statusEl.className = 'error';
     statusEl.textContent = error.message;
