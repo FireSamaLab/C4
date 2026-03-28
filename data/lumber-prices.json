@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "source": "manual-defaults",
+    "updatedAt": null,
+    "note": "Prix de départ avant import RONA"
+  },
+  "prices": {
+    "2x4x8": {
+      "key": "2x4x8",
+      "title": "Bois 2x4x8",
+      "price": 4.95,
+      "unit": "ch",
+      "source": "manual-defaults"
+    },
+    "2x4x10": {
+      "key": "2x4x10",
+      "title": "Bois 2x4x10",
+      "price": 6.25,
+      "unit": "ch",
+      "source": "manual-defaults"
+    },
+    "2x6x8": {
+      "key": "2x6x8",
+      "title": "Bois 2x6x8",
+      "price": 7.45,
+      "unit": "ch",
+      "source": "manual-defaults"
+    },
+    "2x6x10": {
+      "key": "2x6x10",
+      "title": "Bois 2x6x10",
+      "price": 9.45,
+      "unit": "ch",
+      "source": "manual-defaults"
+    },
+    "2x8x10": {
+      "key": "2x8x10",
+      "title": "Bois 2x8x10",
+      "price": 13.95,
+      "unit": "ch",
+      "source": "manual-defaults"
+    },
+    "2x10x12": {
+      "key": "2x10x12",
+      "title": "Bois 2x10x12",
+      "price": 22.95,
+      "unit": "ch",
+      "source": "manual-defaults"
+    }
+  }
+}

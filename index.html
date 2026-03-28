@@ -3,47 +3,177 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estimateur C4 Construction</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f5f7fb;
-        color: #1f2937;
-      }
-      .wrap {
-        max-width: 760px;
-        margin: 40px auto;
-        padding: 20px;
-        background: white;
-        border: 1px solid #dbe2ea;
-        border-radius: 10px;
-      }
-      a {
-        color: #2563eb;
-      }
-      code {
-        background: #f1f5f9;
-        padding: 2px 6px;
-        border-radius: 4px;
-      }
-    </style>
+    <title>C4 Construction – MVP Estimation</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="wrap">
-      <h1>Estimateur C4 Construction (MVP)</h1>
-      <p>Cette application est servie par Node/Express à partir du dossier <strong>public</strong>.</p>
-      <p>
-        Démarrez le serveur, puis ouvrez :
-        <a href="http://localhost:3000">http://localhost:3000</a>
-      </p>
-      <p>
-        Si vous parcourez les fichiers directement, ouvrez :
-        <a href="public/index.html">public/index.html</a>
-      </p>
-      <hr />
-      <p><strong>Note :</strong> Node.js est requis pour exécuter les API backend.</p>
-      <p>Installez Node.js, puis exécutez <code>npm install</code> et <code>npm start</code>.</p>
-    </div>
+    <header class="topbar">
+      <div class="container">
+        <h1>C4 Construction – Estimateur MVP</h1>
+        <p class="muted">Outaouais (Québec) – version locale, simple et évolutive</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Tableau de bord</h2>
+        <div class="row gap">
+          <button id="btnImportRona">Importer les prix RONA (one-time)</button>
+          <button id="btnRefreshProjects" class="secondary">Rafraîchir les projets</button>
+          <a href="#estimateSection" class="button-link">Créer une nouvelle estimation</a>
+        </div>
+        <p id="importStatus" class="muted">Import non lancé.</p>
+      </section>
+
+      <section class="card">
+        <h3>Projets estimés</h3>
+        <div id="projectsList" class="list"></div>
+      </section>
+
+      <section class="card">
+        <h2>Prix de bois normalisés</h2>
+        <p class="muted">
+          Importés depuis RONA (one-time), puis modifiables manuellement avant estimation.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Clé</th>
+              <th>Titre source</th>
+              <th>Prix ($)</th>
+            </tr>
+          </thead>
+          <tbody id="pricesTableBody"></tbody>
+        </table>
+        <div class="row gap">
+          <button id="btnSavePrices" class="secondary">Enregistrer les prix manuels</button>
+        </div>
+        <p id="priceStatus" class="muted"></p>
+      </section>
+
+      <section class="card" id="estimateSection">
+        <h2>Formulaire d'estimation</h2>
+
+        <div class="assumptions-box">
+          <h3>Hypothèses par défaut pour estimation – Québec / Outaouais</h3>
+          <ul>
+            <li>Murs extérieurs: 2x6 (modifiable)</li>
+            <li>Murs intérieurs non porteurs/non mécaniques: 2x4 (modifiable)</li>
+            <li>Espacement des montants: 16 po c/c (modifiable)</li>
+          </ul>
+          <p class="warning">
+            Ces paramètres sont des hypothèses d'affaires pour estimation seulement, et non une garantie de conformité au Code.
+          </p>
+        </div>
+
+        <form id="estimateForm" class="grid-form">
+          <label>
+            Nom du client
+            <input name="clientName" required />
+          </label>
+          <label>
+            Nom du projet
+            <input name="projectName" required />
+          </label>
+          <label>
+            Adresse du projet
+            <input name="projectAddress" required />
+          </label>
+          <label>
+            Type de projet
+            <select name="projectType" required>
+              <option value="Maison rectangulaire">Maison rectangulaire</option>
+              <option value="Bâtiment rectangulaire simple">Bâtiment rectangulaire simple</option>
+            </select>
+          </label>
+
+          <label>
+            Longueur du bâtiment (pi)
+            <input name="buildingLength" type="number" min="1" step="0.1" value="40" required />
+          </label>
+          <label>
+            Largeur du bâtiment (pi)
+            <input name="buildingWidth" type="number" min="1" step="0.1" value="28" required />
+          </label>
+          <label>
+            Nombre d'étages
+            <input name="numberOfFloors" type="number" min="1" step="1" value="1" required />
+          </label>
+          <label>
+            Hauteur des murs extérieurs (pi)
+            <input name="exteriorWallHeight" type="number" min="8" step="0.1" value="8" required />
+          </label>
+
+          <label>
+            Nombre de cloisons intérieures
+            <input name="interiorPartitionsCount" type="number" min="0" step="1" value="0" />
+          </label>
+          <label>
+            Longueur linéaire de cloisons intérieures (pi)
+            <input name="interiorLinearFeet" type="number" min="0" step="0.1" value="0" />
+          </label>
+          <label>
+            Espacement des montants (po)
+            <input name="studSpacing" type="number" min="12" step="1" value="16" required />
+          </label>
+          <label>
+            Espacement des solives (po)
+            <input name="joistSpacing" type="number" min="12" step="1" value="16" required />
+          </label>
+
+          <label>
+            Facteur de perte (%)
+            <input name="wasteFactor" type="number" min="0" step="0.1" value="10" required />
+          </label>
+          <label>
+            Type de bois – murs extérieurs
+            <select name="exteriorWallLumberType">
+              <option value="2x6" selected>2x6 (défaut Outaouais)</option>
+              <option value="2x4">2x4</option>
+              <option value="2x8">2x8</option>
+              <option value="2x10">2x10</option>
+            </select>
+          </label>
+          <label>
+            Type de bois – murs intérieurs
+            <select name="interiorWallLumberType">
+              <option value="2x4" selected>2x4 (défaut Outaouais)</option>
+              <option value="2x6">2x6</option>
+              <option value="2x8">2x8</option>
+              <option value="2x10">2x10</option>
+            </select>
+          </label>
+
+          <label class="checkbox-line">
+            <input name="sheathingIncluded" type="checkbox" checked />
+            Inclure estimation de revêtement extérieur (feuilles 4x8)
+          </label>
+
+          <div class="row gap full-width">
+            <button type="submit">Calculer l'estimation</button>
+          </div>
+        </form>
+        <p id="estimateStatus" class="muted"></p>
+      </section>
+
+      <section class="card">
+        <h2>Résultats</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Clé matériau</th>
+              <th>Description</th>
+              <th>Quantité</th>
+              <th>Prix unitaire</th>
+              <th>Sous-total</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+        <h3 id="totalOutput">Total: $0.00</h3>
+      </section>
+    </main>
+
+    <script type="module" src="/scripts/app.js"></script>
   </body>
 </html>
