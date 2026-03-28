@@ -1,9 +1,22 @@
 {
-  "name": "c4-construction-app",
+  "name": "c4-construction-estimator",
   "version": "1.0.0",
+  "description": "MVP full-stack estimator for C4 Construction",
   "main": "server.js",
-  "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "construction",
+    "estimator",
+    "express",
+    "mvp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.2"
   }
 }

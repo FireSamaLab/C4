@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C4 Construction - New Project</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>C4 Construction Estimator</h1>
+      <nav>
+        <a href="/index.html">Dashboard</a>
+        <a href="/new-project.html" class="active">New Project</a>
+        <a href="/prices.html">Price List</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Create New Estimate Project</h2>
+        <p class="muted">Start with project information and optional plan upload.</p>
+
+        <form id="newProjectForm">
+          <div class="grid-2">
+            <div>
+              <label for="clientName">Client Name *</label>
+              <input id="clientName" name="clientName" required />
+            </div>
+            <div>
+              <label for="projectName">Project Name *</label>
+              <input id="projectName" name="projectName" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label for="projectAddress">Project Address *</label>
+              <input id="projectAddress" name="projectAddress" required />
+            </div>
+            <div>
+              <label for="projectType">Project Type *</label>
+              <select id="projectType" name="projectType" required>
+                <option value="">Select type</option>
+                <option value="rectangular-new-house">Rectangular new house</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="planUpload">Plan Upload (local file)</label>
+            <input id="planUpload" name="planUpload" type="file" accept=".pdf,.png,.jpg,.jpeg,.dwg" />
+          </div>
+
+          <div class="actions">
+            <button type="submit">Create Project</button>
+            <a class="button-secondary" href="/index.html">Back to Dashboard</a>
+          </div>
+        </form>
+
+        <p id="status" class="muted"></p>
+      </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/new-project.js"></script>
+  </body>
+</html>
