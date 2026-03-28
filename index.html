@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C4 Construction - Test API</title>
+</head>
+<body>
+  <h1>Test API C4 Construction</h1>
+
+  <input
+    id="message"
+    type="text"
+    placeholder="Ex: Je veux ouvrir une demande de soumission pour Yannick Fortier au 34 chemin Leopold Marsolais"
+    style="width: 600px;"
+  />
+  <button onclick="sendMessage()">Envoyer</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("message");
+      const output = document.getElementById("output");
+
+      try {
+        const response = await fetch("http://localhost:3000/api/intake", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            userMessage: input.value,
+            history: []
+          })
+        });
+
+        const data = await response.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        output.textContent = "Erreur: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
