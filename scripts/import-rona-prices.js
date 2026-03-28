@@ -222,61 +222,46 @@ function buildCleanPrices(products, sourceUrl) {
 export async function runRonaImport({ sourceUrl = DEFAULT_RONA_URL } = {}) {
   await fs.mkdir(DATA_DIR, { recursive: true });
 
-  try {
-    const response = await fetch(sourceUrl, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'Accept-Language': 'fr-CA,fr;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Cache-Control': 'max-age=0',
-        'Sec-Ch-Ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'Sec-Ch-Ua-Mobile': '?0',
-        'Sec-Ch-Ua-Platform': '"Windows"',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-        'Upgrade-Insecure-Requests': '1'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} lors de la lecture de la page RONA. Le site bloque les requêtes automatisées.`);
+  const response = await fetch(sourceUrl, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
     }
+  });
 
-    const html = await response.text();
-    const products = extractProductsFromHtml(html, sourceUrl);
-
-    const rawPayload = {
-      sourceUrl,
-      importedAt: new Date().toISOString(),
-      productCount: products.length,
-      products
-    };
-
-    await fs.writeFile(RAW_FILE, JSON.stringify(rawPayload, null, 2), 'utf8');
-
-    const clean = buildCleanPrices(products, sourceUrl);
-    await fs.writeFile(CLEAN_FILE, JSON.stringify(clean, null, 2), 'utf8');
-
-    return {
-      sourceUrl,
-      importedAt: rawPayload.importedAt,
-      rawProductCount: products.length,
-      normalizedKeyCount: Object.keys(clean.prices).length,
-      files: {
-        raw: RAW_FILE,
-        clean: CLEAN_FILE
-      }
-    };
-  } catch (error) {
-    // For MVP, if import fails, we'll keep using manual prices
-    console.warn('Import RONA failed:', error.message);
-    throw new Error(`Import RONA impossible: ${error.message}. Utilisez la saisie manuelle des prix.`);
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} lors de la lecture de la page RONA.`);
   }
+
+  const html = await response.text();
+  const products = extractProductsFromHtml(html, sourceUrl);
+
+  const rawPayload = {
+    sourceUrl,
+    importedAt: new Date().toISOString(),
+    productCount: products.length,
+    products
+  };
+
+  await fs.writeFile(RAW_FILE, JSON.stringify(rawPayload, null, 2), 'utf8');
+
+  const clean = buildCleanPrices(products, sourceUrl);
+  await fs.writeFile(CLEAN_FILE, JSON.stringify(clean, null, 2), 'utf8');
+
+  return {
+    sourceUrl,
+    importedAt: rawPayload.importedAt,
+    rawProductCount: products.length,
+    normalizedKeyCount: Object.keys(clean.prices).length,
+    files: {
+      raw: RAW_FILE,
+      clean: CLEAN_FILE
+    }
+  };
 }
+
+// Exécution CLI: npm run import:rona
 const isDirectRun = process.argv[1]
   ? path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))
   : false;

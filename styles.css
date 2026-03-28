@@ -1,18 +1,23 @@
 /*
-  UI simple et propre pour MVP C4.
-  Style volontairement léger et beginner-friendly.
+  UI dark moderne inspirée du visuel fourni.
+  Palette alignée avec la marque C4 (rouge / noir / gris).
 */
 
 :root {
-  --bg: #f3f5f9;
-  --card: #ffffff;
-  --text: #132033;
-  --muted: #5f6f84;
-  --border: #d8e0eb;
-  --primary: #0f62fe;
-  --primary-dark: #0043ce;
-  --secondary: #334155;
-  --warning: #7c2d12;
+  --bg: #0b111b;
+  --bg-soft: #131c29;
+  --card: #121b28;
+  --card-2: #182334;
+  --text: #e5edf8;
+  --muted: #9badc4;
+  --muted-light: #cad7ea;
+  --border: #253447;
+  --primary: #c61f2f;
+  --primary-dark: #9e1422;
+  --secondary: #263548;
+  --warning: #ffcd8a;
+  --ok: #62f2b5;
+  --danger: #ff7a8a;
 }
 
 * {
@@ -21,22 +26,27 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, Segoe UI, Arial, Helvetica, sans-serif;
   background: var(--bg);
   color: var(--text);
+  background-image: radial-gradient(circle at 80% -20%, #6f1620 0%, transparent 38%),
+    radial-gradient(circle at 0% 0%, #1d2940 0%, transparent 34%);
 }
 
 .topbar {
-  background: #0b1e35;
+  background: rgba(8, 13, 22, 0.8);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(5px);
   color: #fff;
-  padding: 16px 0;
-  margin-bottom: 20px;
+  padding: 16px 0 14px;
+  margin-bottom: 18px;
 }
 
 h1,
 h2,
 h3 {
   margin-top: 0;
+  letter-spacing: 0.3px;
 }
 
 .container {
@@ -45,12 +55,73 @@ h3 {
   padding: 0 16px 24px;
 }
 
+.header-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #f7f7f7;
+  border: 1px solid #d9d9d9;
+  padding: 5px;
+}
+
+.muted-light {
+  margin: 0;
+  color: var(--muted-light);
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #3c4e67;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  color: #d8e2f1;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.badge-red {
+  border-color: #8f1a27;
+  background: rgba(198, 31, 47, 0.16);
+  color: #ffd2d7;
+}
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 18px;
   margin-bottom: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.card-hero {
+  background: linear-gradient(140deg, #121b28, #1a2637);
+}
+
+.card-grid {
+  background: linear-gradient(140deg, #111a27, #162132);
 }
 
 .row {
@@ -66,23 +137,27 @@ h3 {
 button,
 .button-link {
   border: none;
-  border-radius: 8px;
-  padding: 10px 12px;
+  border-radius: 10px;
+  padding: 11px 14px;
   background: var(--primary);
   color: #fff;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.18s ease;
+  box-shadow: 0 8px 20px rgba(198, 31, 47, 0.28);
 }
 
 button:hover,
 .button-link:hover {
   background: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 button.secondary {
   background: var(--secondary);
+  box-shadow: none;
 }
 
 .muted {
@@ -95,8 +170,8 @@ button.secondary {
 }
 
 .assumptions-box {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: linear-gradient(180deg, #1e2a3d, #182334);
+  border: 1px solid #344962;
   border-radius: 10px;
   padding: 12px;
   margin-bottom: 14px;
@@ -121,6 +196,8 @@ button.secondary {
   border-radius: 8px;
   padding: 10px;
   font-size: 0.95rem;
+  color: var(--text);
+  background: var(--card-2);
 }
 
 .checkbox-line {
@@ -137,6 +214,9 @@ button.secondary {
 table {
   width: 100%;
   border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
 th,
@@ -148,7 +228,8 @@ td {
 }
 
 th {
-  background: #f8fafc;
+  background: #1a2738;
+  color: #f0f5ff;
 }
 
 .list {
@@ -160,21 +241,30 @@ th {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 10px;
-  background: #fff;
+  background: var(--card-2);
 }
 
 .success {
-  color: #166534;
+  color: var(--ok);
   font-weight: bold;
 }
 
 .error {
-  color: #b91c1c;
+  color: var(--danger);
   font-weight: bold;
+}
+
+.action-wrap {
+  margin-bottom: 8px;
 }
 
 @media (max-width: 900px) {
   .grid-form {
     grid-template-columns: 1fr;
+  }
+
+  .brand-logo {
+    width: 62px;
+    height: 62px;
   }
 }

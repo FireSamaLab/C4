@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C4 Construction - Liste de prix</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Estimateur C4 Construction</h1>
+      <nav>
+        <a href="/index.html">Tableau de bord</a>
+        <a href="/new-project.html">Nouveau projet</a>
+        <a href="/prices.html" class="active">Liste de prix</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Liste de prix manuelle du bois</h2>
+        <p class="muted">Entrez des prix locaux approximatifs (saisie manuelle style Rona).</p>
+
+        <form id="pricesForm">
+          <div class="grid-2">
+            <div>
+              <label for="lumber_2x4x8">2x4x8</label>
+              <input id="lumber_2x4x8" name="lumber_2x4x8" type="number" min="0" step="0.01" required />
+            </div>
+            <div>
+              <label for="lumber_2x4x10">2x4x10</label>
+              <input id="lumber_2x4x10" name="lumber_2x4x10" type="number" min="0" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label for="lumber_2x6x8">2x6x8</label>
+              <input id="lumber_2x6x8" name="lumber_2x6x8" type="number" min="0" step="0.01" required />
+            </div>
+            <div>
+              <label for="lumber_2x6x10">2x6x10</label>
+              <input id="lumber_2x6x10" name="lumber_2x6x10" type="number" min="0" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label for="lumber_2x8x10">2x8x10</label>
+              <input id="lumber_2x8x10" name="lumber_2x8x10" type="number" min="0" step="0.01" required />
+            </div>
+            <div>
+              <label for="lumber_2x10x12">2x10x12</label>
+              <input id="lumber_2x10x12" name="lumber_2x10x12" type="number" min="0" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <label for="osb_sheet">Feuille OSB (4x8)</label>
+              <input id="osb_sheet" name="osb_sheet" type="number" min="0" step="0.01" required />
+            </div>
+            <div>
+              <label for="plywood_sheet">Feuille de contreplaqué (4x8)</label>
+              <input id="plywood_sheet" name="plywood_sheet" type="number" min="0" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Enregistrer la liste de prix</button>
+            <a class="button-secondary" href="/index.html">Retour au tableau de bord</a>
+          </div>
+        </form>
+
+        <p id="status" class="muted"></p>
+      </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/prices.js"></script>
+  </body>
+</html>

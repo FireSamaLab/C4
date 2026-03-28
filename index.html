@@ -8,32 +8,50 @@
   </head>
   <body>
     <header class="topbar">
-      <div class="container">
-        <h1>C4 Construction – Estimateur MVP</h1>
-        <p class="muted">Outaouais (Québec) – version locale, simple et évolutive</p>
+      <div class="container header-grid">
+        <div class="brand-block">
+          <img
+            src="/assets/c4-logo.png"
+            alt="Logo C4 Construction"
+            class="brand-logo"
+          />
+          <div>
+            <h1>C4 Construction – Estimateur MVP</h1>
+            <p class="muted-light">Outaouais (Québec) – version locale, simple et évolutive</p>
+          </div>
+        </div>
+
+        <div class="hero-badges">
+          <span class="badge badge-red">MVP LOCAL</span>
+          <span class="badge">IMPORT RONA ONE-TIME</span>
+          <span class="badge">ESTIMATION RAPIDE</span>
+        </div>
       </div>
     </header>
 
     <main class="container">
-      <section class="card">
+      <section class="card card-hero">
         <h2>Tableau de bord</h2>
-        <div class="row gap">
-          <button id="btnImportRona" class="secondary" disabled>Importer les prix RONA (indisponible)</button>
+        <p class="muted">
+          Interface inspirée d'un style moderne sombre, adaptée à votre branding C4 noir/rouge.
+        </p>
+        <div class="row gap action-wrap">
+          <button id="btnImportRona">Importer les prix RONA (one-time)</button>
           <button id="btnRefreshProjects" class="secondary">Rafraîchir les projets</button>
           <a href="#estimateSection" class="button-link">Créer une nouvelle estimation</a>
         </div>
-        <p id="importStatus" class="muted">L'import RONA n'est pas disponible. Utilisez la saisie manuelle des prix ci-dessous.</p>
+        <p id="importStatus" class="muted">Import non lancé.</p>
       </section>
 
-      <section class="card">
+      <section class="card card-grid">
         <h3>Projets estimés</h3>
         <div id="projectsList" class="list"></div>
       </section>
 
       <section class="card">
-        <h3>Prix de bois normalisés</h3>
+        <h2>Prix de bois normalisés</h2>
         <p class="muted">
-          Saisissez manuellement les prix actuels (recommandé). L'import RONA peut être indisponible.
+          Importés depuis RONA (one-time), puis modifiables manuellement avant estimation.
         </p>
         <table>
           <thead>

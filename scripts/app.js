@@ -175,7 +175,22 @@ function renderResults(projectRecord) {
 }
 
 async function handleImportRonaClick() {
-  setStatus(elements.importStatus, 'L\'import RONA n\'est pas disponible. Utilisez la saisie manuelle des prix.', 'error');
+  setStatus(elements.importStatus, 'Import RONA en cours...', 'muted');
+
+  try {
+    const result = await apiFetch('/api/import-rona-prices', { method: 'POST' });
+    const summary = result.summary;
+
+    setStatus(
+      elements.importStatus,
+      `Import terminé. Produits bruts: ${summary.rawProductCount}. Clés normalisées: ${summary.normalizedKeyCount}.`,
+      'success'
+    );
+
+    await loadPrices();
+  } catch (error) {
+    setStatus(elements.importStatus, error.message, 'error');
+  }
 }
 
 async function handleEstimateSubmit(event) {

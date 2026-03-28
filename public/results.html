@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C4 Construction - Résultats d'estimation</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Estimateur C4 Construction</h1>
+      <nav>
+        <a href="/index.html">Tableau de bord</a>
+        <a href="/new-project.html">Nouveau projet</a>
+        <a href="/prices.html">Liste de prix</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Résultats d'estimation</h2>
+        <p id="projectInfo" class="muted">Chargement du projet...</p>
+
+        <div class="actions">
+          <button id="generateBtn">Générer / recalculer l'estimation</button>
+          <a id="assumptionsLink" class="button-secondary" href="#">Modifier les hypothèses</a>
+          <a class="button-secondary" href="/index.html">Retour au tableau de bord</a>
+        </div>
+
+        <p id="status" class="muted"></p>
+      </section>
+
+      <section class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Quantité</th>
+              <th>Prix unitaire</th>
+              <th>Sous-total</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+
+        <h3 id="totalCost">Coût total : $0.00</h3>
+      </section>
+    </main>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/results.js"></script>
+  </body>
+</html>
