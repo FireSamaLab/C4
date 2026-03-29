@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet – C4 Construction</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container hero-shell">
+        <div class="brand-block">
+          <img
+            src="assets/c4-logo.png"
+            alt="Logo C4 Construction"
+            class="brand-logo"
+            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';"
+          />
+          <div id="logoFallback" class="brand-logo logo-fallback" style="display: none">C4</div>
+          <div class="brand-copy">
+            <p class="eyebrow">C4 CONSTRUCTION • OUTAOUAIS</p>
+            <h1 id="projectTitle">Estimateur AI C4</h1>
+            <p class="muted-light">Application en développement (MVP).</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="side-nav" aria-label="Navigation principale">
+      <a class="side-link" href="index.html">Tableau de bord</a>
+      <a class="side-link" href="create-project.html">Créer un projet</a>
+      <a class="side-link" href="prices.html">Prix & configuration</a>
+      <a id="currentProjectSideLink" class="side-link active" href="project.html" aria-current="page">Fiche projet</a>
+    </nav>
+
+    <main class="container content-with-sidebar">
+      <section class="card card-dashboard">
+        <div class="section-head">
+          <h2>Détails du projet</h2>
+
+          <div class="readiness-inline">
+            <div class="readiness-inline-top">
+              <div class="readiness-inline-left">
+                <strong class="readiness-inline-title">Niveau de préparation des informations pour l'IA</strong>
+                <strong id="readinessLabel" class="readiness-inline-level">Niveau: Faible</strong>
+              </div>
+              <strong id="readinessPercent">0%</strong>
+            </div>
+
+            <div class="readiness-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div id="readinessFill" class="readiness-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-head">
+          <button id="tabOverviewBtn" class="tab-btn active" type="button">Aperçu rapide</button>
+          <button id="tabLocationBtn" class="tab-btn" type="button">Localisation du projet</button>
+          <button id="tabContactBtn" class="tab-btn" type="button">Contact complet</button>
+          <button id="tabProjectInformationBtn" class="tab-btn" type="button">Information projet</button>
+          <button id="tabMaterialLaborBtn" class="tab-btn" type="button">Matériel et main d’œuvre</button>
+        </div>
+
+        <div id="tabOverviewPanel" class="tab-panel active">
+          <div id="projectInfo" class="project-meta-block"></div>
+        </div>
+
+        <div id="tabLocationPanel" class="tab-panel">
+          <form id="projectLocationForm" class="grid-form">
+            <label>
+              Adresse du projet
+              <input id="locationProjectAddress" type="text" />
+            </label>
+
+            <label>
+              Ville
+              <input id="locationCity" type="text" />
+            </label>
+
+            <label>
+              Province
+              <input id="locationProvince" type="text" placeholder="QC" />
+            </label>
+
+            <label>
+              Code postal
+              <input id="locationPostalCode" type="text" placeholder="A1A 1A1" />
+            </label>
+
+            <label>
+              Région
+              <input id="locationRegion" type="text" placeholder="Outaouais" />
+            </label>
+
+            <label>
+              Référence lot / civique (optionnel)
+              <input id="locationLotReference" type="text" />
+            </label>
+
+            <div class="row gap full-width">
+              <button type="submit" class="btn-primary">Enregistrer la localisation</button>
+            </div>
+          </form>
+          <p id="locationStatus" class="muted">Localisation non modifiée.</p>
+        </div>
+
+        <div id="tabContactPanel" class="tab-panel">
+          <form id="projectContactForm" class="grid-form">
+            <label>
+              Nom complet
+              <input id="contactFullName" type="text" />
+            </label>
+
+            <label>
+              Adresse (contact)
+              <input id="contactAddress" type="text" />
+            </label>
+
+            <label>
+              Adresse du projet
+              <input id="contactProjectAddress" type="text" />
+            </label>
+
+            <label>
+              Téléphone
+              <input id="contactPhoneNumber" type="text" placeholder="819-555-1234" />
+            </label>
+
+            <label>
+              Courriel
+              <input id="contactEmail" type="email" placeholder="client@exemple.com" />
+            </label>
+
+            <div class="row gap full-width">
+              <button type="submit" class="btn-primary">Enregistrer les coordonnées</button>
+            </div>
+          </form>
+          <p id="contactStatus" class="muted">Coordonnées non modifiées.</p>
+        </div>
+
+        <div id="tabProjectInformationPanel" class="tab-panel">
+          <div class="project-meta-block project-information-block">
+            <h3 id="projectInformationTitle" class="project-information-title">Information projet</h3>
+            <p id="projectInformationHelp" class="muted project-information-help">
+              Sélectionnez d'abord un type de projet pour afficher les champs pertinents.
+            </p>
+
+            <form id="projectInformationForm" class="grid-form project-information-form">
+              <label>
+                Type de projet
+                <select id="projectInfoWorkType" required>
+                  <option value="">Sélectionnez un type de projet</option>
+                  <option value="Construction neuve">Construction neuve</option>
+                  <option value="Rénovation">Rénovation</option>
+                  <option value="Démolition / Rénovation">Démolition / Rénovation</option>
+                  <option value="Projet">Projet</option>
+                </select>
+              </label>
+
+              <section id="projectInfoSectionNewConstruction" class="full-width project-info-section">
+                <p class="overview-label full-width project-info-section-title">Construction neuve</p>
+
+                <div class="grid-form">
+                  <label>
+                    Type de propriété
+                    <select id="projectInfoPropertyType" required>
+                      <option value="Maison">Maison</option>
+                      <option value="Plex / duplex / triplex">Plex / duplex / triplex</option>
+                      <option value="Garage">Garage</option>
+                      <option value="Chalet">Chalet</option>
+                      <option value="Agrandissement">Agrandissement</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Nouvelle construction ou partielle
+                    <select id="projectInfoBuildScope" required>
+                      <option value="Construction complète">Construction complète</option>
+                      <option value="Enveloppe seulement">Enveloppe seulement</option>
+                      <option value="Charpente seulement">Charpente seulement</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Longueur du bâtiment (pi)
+                    <input id="projectInfoBuildingLength" type="number" min="0" step="0.1" placeholder="Ex. 40" />
+                  </label>
+
+                  <label>
+                    Largeur du bâtiment (pi)
+                    <input id="projectInfoBuildingWidth" type="number" min="0" step="0.1" placeholder="Ex. 28" />
+                  </label>
+
+                  <label>
+                    Nombre d'étages
+                    <input id="projectInfoNumberOfStories" type="number" min="1" step="1" placeholder="Ex. 2" />
+                  </label>
+
+                  <label>
+                    Type de fondation / sous-sol
+                    <select id="projectInfoBasementType">
+                      <option value="Aucun">Aucun</option>
+                      <option value="Sous-sol complet">Sous-sol complet</option>
+                      <option value="Sous-sol avec sortie extérieure">Sous-sol avec sortie extérieure</option>
+                      <option value="Dalle sur sol">Dalle sur sol</option>
+                      <option value="Vide sanitaire">Vide sanitaire</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Hauteur murs/plafond - sous-sol (pi)
+                    <input id="projectInfoWallHeightBasement" type="number" min="0" step="0.1" placeholder="Ex. 8" />
+                  </label>
+
+                  <label>
+                    Hauteur murs/plafond - rez-de-chaussée (pi)
+                    <input id="projectInfoWallHeightMainFloor" type="number" min="0" step="0.1" placeholder="Ex. 9" />
+                  </label>
+
+                  <label>
+                    Hauteur murs/plafond - deuxième étage (pi)
+                    <input id="projectInfoWallHeightSecondFloor" type="number" min="0" step="0.1" placeholder="Ex. 8" />
+                  </label>
+
+                  <label>
+                    Hauteur murs/plafond - garage (pi)
+                    <input id="projectInfoWallHeightGarage" type="number" min="0" step="0.1" placeholder="Ex. 9" />
+                  </label>
+
+                  <label>
+                    Plafond cathédrale
+                    <select id="projectInfoHasCathedralCeiling">
+                      <option value="Non">Non</option>
+                      <option value="Oui">Oui</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Garage
+                    <select id="projectInfoHasGarage">
+                      <option value="Non">Non</option>
+                      <option value="Oui">Oui</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Type de garage
+                    <select id="projectInfoGarageType">
+                      <option value="Aucun">Aucun</option>
+                      <option value="Attaché">Attaché</option>
+                      <option value="Détaché">Détaché</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Dimension du garage
+                    <input id="projectInfoGarageSize" type="text" placeholder="Ex. 24 x 24" />
+                  </label>
+
+                  <label>
+                    Estimation murs intérieurs (pi linéaires)
+                    <input id="projectInfoInteriorWallEstimate" type="number" min="0" step="1" placeholder="Ex. 160" />
+                  </label>
+
+                  <label>
+                    Espacement des montants (po)
+                    <input id="projectInfoStudSpacing" type="number" min="0" step="1" placeholder="Ex. 16" />
+                  </label>
+
+                  <label>
+                    Facteur de perte (%)
+                    <input id="projectInfoWasteFactor" type="number" min="0" step="0.1" placeholder="Ex. 10" />
+                  </label>
+
+                  <label>
+                    Style de toiture
+                    <input id="projectInfoRoofStyle" type="text" placeholder="Ex. Deux versants" />
+                  </label>
+
+                  <label>
+                    Pente de toit
+                    <input id="projectInfoRoofPitch" type="text" placeholder="Ex. 6/12" />
+                  </label>
+
+                  <label>
+                    Type de toiture
+                    <select id="projectInfoRoofMaterial">
+                      <option value="Asphalte">Asphalte</option>
+                      <option value="Métal">Métal</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Toit plat
+                    <select id="projectInfoHasFlatRoof">
+                      <option value="Non">Non</option>
+                      <option value="Oui">Oui</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Type de plancher
+                    <input id="projectInfoFlooringType" type="text" placeholder="Ex. Bois franc, flottant" />
+                  </label>
+
+                  <label>
+                    Revêtement extérieur
+                    <input id="projectInfoExteriorCladding" type="text" placeholder="Ex. Vinyle, fibrociment, brique" />
+                  </label>
+
+                  <label class="full-width">
+                    Détails additionnels du client (notes)
+                    <textarea
+                      id="projectInfoClientPreferences"
+                      rows="4"
+                      placeholder="Préférences client, matériaux, finitions, contraintes, etc."
+                    ></textarea>
+                  </label>
+                </div>
+              </section>
+
+              <section id="projectInfoSectionRenovation" class="full-width project-info-section" hidden>
+                <p class="overview-label full-width project-info-section-title">Rénovation</p>
+                <div class="grid-form">
+                  <label>Type de bâtiment<input id="renovationBuildingType" type="text" /></label>
+                  <label>Âge approximatif du bâtiment<input id="renovationBuildingAge" type="text" placeholder="Ex. 1985" /></label>
+                  <label>Nombre d'étages existants<input id="renovationExistingFloors" type="number" min="0" step="1" /></label>
+                  <label>Sous-sol<select id="renovationHasBasement"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Surfaces / pièces touchées<input id="renovationAffectedAreas" type="text" /></label>
+                  <label>Type de murs existants<select id="renovationExistingWallType"><option value="Connu">Connu</option><option value="Inconnu">Inconnu</option></select></label>
+                  <label>Hauteur de plafond existante (pi)<input id="renovationExistingCeilingHeight" type="number" min="0" step="0.1" /></label>
+                  <label>Catégorie de rénovation<select id="renovationCategory"><option value="Cuisine">Cuisine</option><option value="Salle de bain">Salle de bain</option><option value="Sous-sol">Sous-sol</option><option value="Intérieur complet">Intérieur complet</option><option value="Extérieur">Extérieur</option><option value="Structurel">Structurel</option></select></label>
+                  <label>Murs retirés<select id="renovationWallsRemoved"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Murs ajoutés<select id="renovationWallsAdded"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Travaux structurels<select id="renovationStructuralWork"><option value="Non">Non</option><option value="Oui">Oui</option><option value="Inconnu">Inconnu</option></select></label>
+                  <label>Plancher remplacé<select id="renovationFlooringReplaced"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Cuisine remplacée<select id="renovationKitchenReplaced"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Salle de bain remplacée<select id="renovationBathroomReplaced"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Mise à niveau électrique<select id="renovationElectricalUpgrade"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Mise à niveau plomberie<select id="renovationPlumbingUpgrade"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Bâtiment occupé pendant les travaux<select id="renovationOccupiedDuringWork"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Problèmes connus / conditions cachées<textarea id="renovationKnownIssues" rows="3"></textarea></label>
+                  <label>Niveau de finition<select id="renovationFinishLevel"><option value="Base">Base</option><option value="Standard">Standard</option><option value="Haut de gamme">Haut de gamme</option></select></label>
+                  <label class="full-width">Notes<textarea id="renovationNotes" rows="4"></textarea></label>
+                </div>
+              </section>
+
+              <section id="projectInfoSectionDemolitionRenovation" class="full-width project-info-section" hidden>
+                <p class="overview-label full-width project-info-section-title">Démolition / Rénovation</p>
+                <div class="grid-form">
+                  <label>Type de bâtiment<input id="demolitionBuildingType" type="text" /></label>
+                  <label>Âge approximatif du bâtiment<input id="demolitionBuildingAge" type="text" placeholder="Ex. 1970" /></label>
+                  <label>Nombre d'étages<input id="demolitionNumberOfFloors" type="number" min="0" step="1" /></label>
+                  <label>Type de sous-sol<select id="demolitionBasementType"><option value="Aucun">Aucun</option><option value="Sous-sol complet">Sous-sol complet</option><option value="Sous-sol avec sortie extérieure">Sous-sol avec sortie extérieure</option><option value="Dalle sur sol">Dalle sur sol</option><option value="Vide sanitaire">Vide sanitaire</option></select></label>
+                  <label>Type de démolition<select id="demolitionType"><option value="Sélective">Sélective</option><option value="Déconstruction complète">Déconstruction complète</option><option value="Jusqu'aux montants">Jusqu'aux montants</option><option value="Partielle">Partielle</option></select></label>
+                  <label>Zones à démolir<input id="demolitionAreasToDemolish" type="text" /></label>
+                  <label>Retrait de cloisons<select id="demolitionRemovePartitions"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Retrait de plafonds<select id="demolitionRemoveCeilings"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Retrait de planchers<select id="demolitionRemoveFlooring"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Retrait du revêtement de toiture<select id="demolitionRemoveRoofCovering"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Retrait fenêtres/portes<select id="demolitionRemoveWindowsDoors"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Matériaux dangereux suspectés<select id="demolitionHazardousMaterials"><option value="Non">Non</option><option value="Oui">Oui</option><option value="Inconnu">Inconnu</option></select></label>
+                  <label>Support temporaire / étaiement requis<select id="demolitionShoringRequired"><option value="Non">Non</option><option value="Oui">Oui</option><option value="Inconnu">Inconnu</option></select></label>
+                  <label>Bâtiment occupé pendant les travaux<select id="demolitionOccupiedDuringWork"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Conteneur requis<select id="demolitionDisposalBinRequired"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Reconstruction charpente<select id="demolitionRebuildFraming"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Reconstruction isolation<select id="demolitionRebuildInsulation"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Reconstruction gypse<select id="demolitionRebuildDrywall"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Reconstruction électrique<select id="demolitionRebuildElectrical"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Reconstruction plomberie<select id="demolitionRebuildPlumbing"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label class="full-width">Notes<textarea id="demolitionNotes" rows="4"></textarea></label>
+                </div>
+              </section>
+
+              <section id="projectInfoSectionSmallProject" class="full-width project-info-section" hidden>
+                <p class="overview-label full-width project-info-section-title">Projet (terrasse, remise, etc.)</p>
+                <div class="grid-form">
+                  <label>Type de structure<select id="smallProjectStructureType"><option value="Terrasse">Terrasse</option><option value="Remise">Remise</option><option value="Pergola">Pergola</option><option value="Gazebo">Gazebo</option><option value="Clôture">Clôture</option><option value="Garage détaché">Garage détaché</option><option value="Escalier extérieur">Escalier extérieur</option><option value="Abri d'auto">Abri d'auto</option></select></label>
+                  <label>Attaché ou détaché<select id="smallProjectAttachedOrDetached"><option value="Attaché">Attaché</option><option value="Détaché">Détaché</option></select></label>
+                  <label>Longueur (pi)<input id="smallProjectLength" type="number" min="0" step="0.1" /></label>
+                  <label>Largeur (pi)<input id="smallProjectWidth" type="number" min="0" step="0.1" /></label>
+                  <label>Hauteur (pi)<input id="smallProjectHeight" type="number" min="0" step="0.1" /></label>
+                  <label>Forme<select id="smallProjectShape"><option value="Rectangulaire">Rectangulaire</option><option value="En L">En L</option><option value="Sur mesure">Sur mesure</option></select></label>
+                  <label>Nombre de niveaux<input id="smallProjectNumberOfLevels" type="number" min="1" step="1" /></label>
+                  <label>Système de fondation / support<select id="smallProjectFoundationSystem"><option value="Dalle">Dalle</option><option value="Sonotubes">Sonotubes</option><option value="Blocs de terrasse">Blocs de terrasse</option><option value="Pieux vissés">Pieux vissés</option><option value="Base de gravier">Base de gravier</option><option value="Autre">Autre</option></select></label>
+                  <label>Matériau de structure<input id="smallProjectFramingMaterial" type="text" /></label>
+                  <label>Matériau de finition<input id="smallProjectFinishMaterial" type="text" /></label>
+                  <label>Toiture incluse<select id="smallProjectRoofIncluded"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Matériau de toiture<input id="smallProjectRoofingMaterial" type="text" /></label>
+                  <label>Garde-corps inclus<select id="smallProjectRailingIncluded"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Escaliers inclus<select id="smallProjectStairsIncluded"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Jupe de finition incluse<select id="smallProjectSkirtingIncluded"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Structure existante à retirer<select id="smallProjectExistingStructureToRemove"><option value="Non">Non</option><option value="Oui">Oui</option></select></label>
+                  <label>Conditions du site<input id="smallProjectSiteConditions" type="text" /></label>
+                  <label class="full-width">Notes<textarea id="smallProjectNotes" rows="4"></textarea></label>
+                </div>
+              </section>
+
+              <label class="full-width project-upload-label">
+                Plans architecturaux (PDF)
+                <input id="projectInfoArchitecturalPlans" type="file" accept=".pdf" />
+              </label>
+              <p id="projectInfoArchitecturalPlansName" class="muted full-width">Aucun fichier sélectionné.</p>
+
+              <label class="full-width project-upload-label">
+                Plans d'étage
+                <input id="projectInfoFloorPlans" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.dwg" />
+              </label>
+              <p id="projectInfoFloorPlansName" class="muted full-width">Aucun fichier sélectionné.</p>
+
+              <div class="row gap full-width project-information-actions">
+                <button type="submit" class="btn-primary">Enregistrer l'information projet</button>
+              </div>
+            </form>
+
+            <p id="projectInformationStatus" class="muted">Information projet non modifiée.</p>
+
+            <div class="project-meta-block" style="margin-top: 12px">
+              <h3>Dossier IA (ChatGPT + plan PDF)</h3>
+              <p class="muted">
+                Génère un prompt prêt à coller dans ChatGPT pour valider les informations du projet et estimer les
+                besoins de bois de charpente à partir du plan PDF.
+              </p>
+
+              <div class="row gap" style="margin-top: 10px">
+                <button id="generateAiPackageBtn" type="button" class="btn-primary">Générer le dossier IA</button>
+                <button id="copyAiPromptBtn" type="button" class="btn-ghost">Copier le prompt</button>
+              </div>
+
+              <label class="full-width" style="margin-top: 10px">
+                Sortie prête pour ChatGPT
+                <textarea
+                  id="aiPromptOutput"
+                  rows="14"
+                  placeholder="Le prompt et le JSON du dossier apparaîtront ici."
+                ></textarea>
+              </label>
+
+              <p id="aiExportStatus" class="muted">Aucun dossier IA généré.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tabMaterialLaborPanel" class="tab-panel">
+          <div class="project-meta-block project-information-block">
+            <h3>Matériel et main d’œuvre</h3>
+            <p class="muted project-information-help">
+              Renseignez les hypothèses de coûts pour faciliter l'analyse et la préparation des estimations.
+            </p>
+
+            <div class="row gap" style="margin-bottom: 10px">
+              <button id="materialLaborAddEntryBtn" type="button" class="btn-primary">Ajouter une entrée</button>
+            </div>
+
+            <div id="materialLaborEditor" class="project-info-section" hidden>
+              <p class="overview-label project-info-section-title">Sélecteur guidé — Nouvelle entrée</p>
+
+              <div class="grid-form">
+                <label>
+                  Type d'entrée
+                  <select id="mlEntryType">
+                    <option value="materiel">Matériel</option>
+                    <option value="main_oeuvre">Main d’œuvre</option>
+                  </select>
+                </label>
+
+                <label>
+                  Catégorie
+                  <select id="mlEntryCategory"></select>
+                </label>
+
+                <label>
+                  Sous-type
+                  <select id="mlEntrySubType"></select>
+                </label>
+
+                <label>
+                  Élément
+                  <select id="mlEntryItem"></select>
+                </label>
+
+                <label>
+                  Élément personnalisé (si "Autre")
+                  <input id="mlEntryItemCustom" type="text" placeholder="Ex. Produit ou tâche spécifique" />
+                </label>
+
+                <label>
+                  Quantité
+                  <input id="mlEntryQuantity" type="number" min="0" step="0.01" placeholder="Ex. 95" />
+                </label>
+
+                <div class="row gap full-width">
+                  <button id="mlEntrySaveBtn" type="button" class="btn-primary">Enregistrer l'entrée</button>
+                  <button id="mlEntryCancelBtn" type="button" class="btn-ghost">Annuler</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Catégorie</th>
+                    <th>Sous-type</th>
+                    <th>Élément</th>
+                    <th>Quantité</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="materialLaborEntriesBody"></tbody>
+              </table>
+            </div>
+
+            <p id="materialLaborEmpty" class="muted">Aucune entrée. Cliquez sur « Ajouter une entrée ».</p>
+
+            <p id="materialLaborStatus" class="muted">Section non modifiée.</p>
+          </div>
+        </div>
+
+        <p id="projectStatus" class="muted">Chargement...</p>
+      </section>
+
+    </main>
+
+    <script src="scripts/project-page.js"></script>
+  </body>
+</html>

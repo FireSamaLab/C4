@@ -42,6 +42,58 @@ Puis ouvrir:
 
 http://localhost:3000
 
+## Charger les fichiers de démonstration (recommandé pour tests)
+
+Commande:
+
+npm run seed:demo
+
+Cette commande remplace les fichiers actifs dans [data](data) avec les jeux de démo:
+
+- [data/demo/projects.demo.json](data/demo/projects.demo.json)
+- [data/demo/lumber-prices.demo.json](data/demo/lumber-prices.demo.json)
+- [data/demo/prices.demo.json](data/demo/prices.demo.json)
+- [data/demo/raw-rona-prices.demo.json](data/demo/raw-rona-prices.demo.json)
+
+Les démos incluent les 4 types de projet de l'onglet Information projet:
+
+- Construction neuve
+- Rénovation
+- Démolition / Rénovation
+- Projet (terrasse, remise, etc.)
+
+## Structure unifiée (active)
+
+L'application active est maintenant **à la racine**:
+
+- [server.js](server.js) (API Express)
+- [index.html](index.html)
+- [create-project.html](create-project.html)
+- [project.html](project.html)
+- [prices.html](prices.html)
+- [scripts](scripts)
+- [styles.css](styles.css)
+- [data](data)
+
+Les anciennes versions ont été archivées dans:
+
+- [legacy-archive-20260328.zip](legacy-archive-20260328.zip)
+
+Le dossier legacy a été supprimé et n'est plus utilisé par le flux MVP principal.
+
+## Vues de l'application (navigation)
+
+- Dashboard: [index.html](index.html)
+- Prix matériaux: [prices.html](prices.html)
+- Créer un projet: [create-project.html](create-project.html)
+- Page projet (profil, pièces jointes, préparation IA): [project.html](project.html)
+
+Le flux recommandé:
+1. Créer un projet
+2. Ouvrir le profil projet et renseigner plan/notes
+3. Mettre à jour les prix via la vue Prix
+4. Consulter les projets depuis le Dashboard
+
 ## Endpoints API principaux
 
 - GET /api/health

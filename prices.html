@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C4 Construction – MVP Estimation</title>
+    <title>Prix matériaux – C4 Construction</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="dashboard-page">
+  <body>
     <header class="topbar">
       <div class="container hero-shell">
         <div class="brand-block">
@@ -27,42 +27,46 @@
     </header>
 
     <nav class="side-nav" aria-label="Navigation principale">
-      <a class="side-link active" href="index.html" aria-current="page">Tableau de bord</a>
+      <a class="side-link" href="index.html">Tableau de bord</a>
       <a class="side-link" href="create-project.html">Créer un projet</a>
-      <a class="side-link" href="prices.html">Prix & configuration</a>
+      <a class="side-link active" href="prices.html" aria-current="page">Prix & configuration</a>
     </nav>
 
     <main class="container content-with-sidebar">
-      <section class="card card-dashboard dashboard-hero">
+      <section class="card card-dashboard">
         <div class="section-head">
-          <div>
-            <h2>Tableau de bord</h2>
-          </div>
-
-          <div class="dashboard-search">
-            <span class="dashboard-search-title muted">Recherche</span>
-            <input
-              id="projectSearchInput"
-              type="text"
-              aria-label="Recherche de projets"
-              placeholder="Nom projet, client, adresse..."
-              autocomplete="off"
-            />
-          </div>
+          <h2>Mise à jour des prix</h2>
         </div>
 
-        <p id="dashboardStatus" class="muted">Chargement...</p>
+        <div class="row gap action-wrap">
+          <button id="btnImportRona" class="btn-primary">Importer les prix RONA</button>
+          <button id="btnSavePrices" class="btn-secondary">Enregistrer les prix manuels</button>
+        </div>
+
+        <p id="priceStatus" class="muted">Aucune action en cours.</p>
       </section>
 
       <section class="card">
         <div class="section-head">
-          <h3>Projets estimés</h3>
-          <p id="projectsFoundCount" class="muted">0 projet trouvé</p>
+          <h3>Prix normalisés</h3>
         </div>
-        <div id="projectsList" class="list"></div>
+        <p class="muted section-caption">Mettez à jour les valeurs puis enregistrez les prix manuels.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Clé</th>
+                <th>Titre source</th>
+                <th>Prix ($)</th>
+              </tr>
+            </thead>
+            <tbody id="pricesTableBody"></tbody>
+          </table>
+        </div>
       </section>
     </main>
 
-    <script src="scripts/dashboard.js"></script>
+    <script type="module" src="scripts/prices-view.js"></script>
   </body>
 </html>

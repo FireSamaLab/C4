@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créer un projet – C4 Construction</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container hero-shell">
+        <div class="brand-block">
+          <img
+            src="assets/c4-logo.png"
+            alt="Logo C4 Construction"
+            class="brand-logo"
+            onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';"
+          />
+          <div id="logoFallback" class="brand-logo logo-fallback" style="display: none">C4</div>
+          <div class="brand-copy">
+            <p class="eyebrow">C4 CONSTRUCTION • OUTAOUAIS</p>
+            <h1>Estimateur AI C4</h1>
+            <p class="muted-light">Application en développement (MVP).</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="side-nav" aria-label="Navigation principale">
+      <a class="side-link" href="index.html">Tableau de bord</a>
+      <a class="side-link active" href="create-project.html" aria-current="page">Créer un projet</a>
+      <a class="side-link" href="prices.html">Prix & configuration</a>
+    </nav>
+
+    <main class="container content-with-sidebar">
+      <section class="card">
+        <div class="section-head">
+          <h2>Information de base du projet</h2>
+        </div>
+
+        <form id="createProjectForm" class="grid-form">
+          <label>
+            Nom du client
+            <input name="clientName" required />
+          </label>
+
+          <label>
+            Nom du projet
+            <input name="projectName" required />
+          </label>
+
+          <label>
+            Adresse du projet
+            <input name="projectAddress" required />
+          </label>
+
+          <label>
+            Type de Propriété
+            <select name="projectType" required>
+              <option value="Maison résidentielle">Maison résidentielle</option>
+              <option value="Plex">Plex</option>
+              <option value="Garage">Garage</option>
+              <option value="Chalet">Chalet</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </label>
+
+          <label>
+            Type de projet
+            <select name="projectWorkType" required>
+              <option value="Construction neuve">Construction neuve</option>
+              <option value="Rénovation">Rénovation</option>
+              <option value="Démolition / Rénovation">Démolition / Rénovation</option>
+              <option value="Projet">Projet</option>
+            </select>
+          </label>
+
+          <div class="row gap full-width">
+            <button type="submit" class="btn-primary">Créer le projet</button>
+          </div>
+        </form>
+
+        <p id="createProjectStatus" class="muted">Veuillez remplir le formulaire.</p>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/create-project.js"></script>
+  </body>
+</html>

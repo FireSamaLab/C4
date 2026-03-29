@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "import:rona": "node scripts/import-rona-prices.js"
+    "import:rona": "node scripts/import-rona-prices.js",
+    "seed:demo": "node scripts/seed-demo-data.js"
   },
   "keywords": [
     "construction",
